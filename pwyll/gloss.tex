@@ -1,0 +1,46 @@
+\usepackage{pgfkeys, ifthen}
+
+\newcommand{\gramsymbols}{\fontspec[Color=008800, Scale=0.75]{Symbola}}
+\newcommand{\sg}{{\gramsymbols ·}}
+\newcommand{\pl}{{\gramsymbols ∴}}
+\newcommand{\fem}{{\gramsymbols ♀}}
+\newcommand{\masc}{{\gramsymbols ♂}}
+\newcommand{\anaph}{{\gramsymbols ☜}}
+\newcommand{\kataph}{{\gramsymbols ☞}}
+\newcommand{\soft}{{\gramsymbols °}}
+\newcommand{\nasal}{{\gramsymbols 👃}}
+\newcommand{\asp}{{\gramsymbols ☁}}
+
+\definecolor{qucolour}{HTML}{568203}
+\newcommand{\qu}[1]{\textcolor{qucolour}{\textbf{\{}}\textcolor{qucolour}{#1}\textcolor{qucolour}{\textbf{\}}}}
+
+\newcommand{\hyn}{→}
+
+\newcommand{\dictfont}{\addfontfeatures{Color=000088, Scale=0.75}}
+\newcommand{\gramfont}{\addfontfeatures{Color=008800, Scale=0.75}}
+\newcommand{\transfont}{\addfontfeatures{Color=880088, Scale=0.75}}
+\newcommand{\notefont}{\addfontfeatures{Color=880000, Scale=0.75}}
+
+% d → dictionary form
+% g → grammatical information
+% n → note
+\pgfkeys{
+	/gloss/.is family, /gloss,
+	default/.style = {d=, g=, n=},
+	d/.estore in = \glossDict,
+	g/.estore in = \glossGram,
+	n/.estore in = \glossNote,
+}
+
+\newcommand\gl[3][]{%
+	\pgfkeys{/gloss, default, #1}%
+	\setlength{\tabcolsep}{0pt}
+	\begin{tabular}[b]{c}
+		\ifthenelse{\not\equal{\glossDict}{}}{{\dictfont [\glossDict]} }{}%
+		\ifthenelse{\not\equal{\glossGram}{}}{{\gramfont \glossGram} }{}%
+		\ifthenelse{\not\equal{#3}{}}{\transfont #3}{}%
+		\ifthenelse{\not\equal{\glossNote}{}}{{\notefont\ \glossNote} }{}%
+		\\
+		#2
+	\end{tabular}
+}

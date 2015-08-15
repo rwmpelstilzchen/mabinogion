@@ -1,0 +1,24 @@
+%s/ / /g
+
+%s/^<div class="left line" id="\([^"]*\)">\(.*\)<\/div>$/\\ml{\1}\2/g
+
+%s/<span class="nospace">|<\/span>/|/g
+%s/ <span class="hyphen-single"> ̷<\/span><span class="hyphen-editorial">+<\/span>/ ̷/g
+%s/ <span class="hyphen-double"> ̷ ̷<\/span><span class="hyphen-editorial">+<\/span>/⸗/g
+%s/<span class="hyphen-editorial">+<\/span>/+/g
+%s/<span class="hyphen-single"> ̷<\/span>/\//g
+%s/<span class="space">·<\/span>/␣/g
+
+%s/<span class="rubric">\(\S*\)<\/span>/\\mr{\1}/g
+%s/<span class="medial">\(\S*\)<\/span>/\\mm{\1}/g
+%s/<span class="rubric medial">\(\S*\)<\/span>/\\mrm{\1}/g
+
+%s/<span class="add-supralinear">\(\S*\)<\/span>/\\mas{\1}/g
+%s/<span class="expan">\(\S*\)<\/span>/\\me{\1}/g
+%s/<span class="supplied-damage">\(\S*\)<\/span>/\\msd{\1}/g
+%s/<span class="supplied-illegible">\(\S*\)<\/span>/\\msi{\1}/g
+%s/<span class="unclear-faint">\(\S*\)<\/span>/\\muf{\1}/g
+%s/<span class="unclear-retraced">\(\S*\)<\/span>/\\mur{\1}/g
+%s/<span class="unclear-correction">\(\S*\)<\/span>/\\muc{\1}/g
+
+%s/<span class="semi-cap">\(\S*\)<\/span>/\\msc{\1}/g
